@@ -16,6 +16,7 @@
 		45866F7B2A13C59900DF7706 /* TrainingSessiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F7A2A13C59900DF7706 /* TrainingSessiom.swift */; };
 		45866F7D2A13C5A900DF7706 /* TrainingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F7C2A13C5A900DF7706 /* TrainingTask.swift */; };
 		45866F7F2A14C72700DF7706 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F7E2A14C72600DF7706 /* Configuration.swift */; };
+		45866F822A14E58B00DF7706 /* CogniFitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F812A14E58B00DF7706 /* CogniFitAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		45866F7C2A13C5A900DF7706 /* TrainingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTask.swift; sourceTree = "<group>"; };
 		45866F7E2A14C72600DF7706 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		45866F802A14CD8E00DF7706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		45866F812A14E58B00DF7706 /* CogniFitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogniFitAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				45866F752A13BDAB00DF7706 /* Model */,
 				45866F672A13BB6500DF7706 /* PartnerDemoApp.swift */,
 				45866F692A13BB6500DF7706 /* ContentView.swift */,
+				45866F812A14E58B00DF7706 /* CogniFitAPI.swift */,
 				45866F6B2A13BB6600DF7706 /* Assets.xcassets */,
 				45866F6D2A13BB6600DF7706 /* Preview Content */,
 			);
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45866F792A13C4C600DF7706 /* ActivityType.swift in Sources */,
+				45866F822A14E58B00DF7706 /* CogniFitAPI.swift in Sources */,
 				45866F772A13BDC500DF7706 /* Assessment.swift in Sources */,
 				45866F7F2A14C72700DF7706 /* Configuration.swift in Sources */,
 				45866F7D2A13C5A900DF7706 /* TrainingTask.swift in Sources */,

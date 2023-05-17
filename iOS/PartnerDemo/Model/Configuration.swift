@@ -7,12 +7,14 @@
 
 import Foundation
 
+/** Reads the configuration values from the App's Info.plist file.
+ */
 class Configuration: ObservableObject {
     @Published var clientId = ""
     @Published var clientSecret = ""
     @Published var userToken = ""
     @Published var isValid = false
-    
+
     static let kClientIdKey = "COGNIFIT_CLIENT_ID"
     static let kClientSecretKey = "COGNIFIT_CLIENT_SECRET"
     static let kUserTokenKey = "COGNIFIT_USER_TOKEN"
