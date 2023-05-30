@@ -11,7 +11,9 @@ import SwiftUI
 struct PartnerDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().onOpenURL { url in
+                print ("TODO: handle callback \(url)")
+            }
         }
     }
 }

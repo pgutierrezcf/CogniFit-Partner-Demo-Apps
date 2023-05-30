@@ -32,6 +32,7 @@
 		45866F7E2A14C72600DF7706 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		45866F802A14CD8E00DF7706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		45866F812A14E58B00DF7706 /* CogniFitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogniFitAPI.swift; sourceTree = "<group>"; };
+		45926A142A260C96005FF2B0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 				45866F812A14E58B00DF7706 /* CogniFitAPI.swift */,
 				45866F6B2A13BB6600DF7706 /* Assets.xcassets */,
 				45866F6D2A13BB6600DF7706 /* Preview Content */,
+				45926A142A260C96005FF2B0 /* README.md */,
 			);
 			path = PartnerDemo;
 			sourceTree = "<group>";
@@ -105,6 +107,7 @@
 				45866F602A13BB6500DF7706 /* Sources */,
 				45866F612A13BB6500DF7706 /* Frameworks */,
 				45866F622A13BB6500DF7706 /* Resources */,
+				45926A132A2604FB005FF2B0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -159,6 +162,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		45926A132A2604FB005FF2B0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Info.plist",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge public and private Info.plist files, this allows us to commit the project without credentials\nif [ -f \"${SRCROOT}/${PROJECT_NAME}/PrivateInfo.plist\" ]; then\n    /usr/libexec/PlistBuddy -x -c \"Merge ${SRCROOT}/${PROJECT_NAME}/PrivateInfo.plist\" \"${CODESIGNING_FOLDER_PATH}/Info.plist\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		45866F602A13BB6500DF7706 /* Sources */ = {
