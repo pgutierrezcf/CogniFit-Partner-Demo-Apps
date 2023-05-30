@@ -1,4 +1,8 @@
-# Notes on the Info.plist file
+# Purpose of these Apps
+The purpose of these Apps is to provide the simplest reference implementation of a "single sign on" flow between your App and CogniFit's.
+Keep in mind: **accessing the API through the App/client is NOT recommended** because it forces you to include your ID and secret in the App itself, which is not secure and, if compromised, would allow an attacker to access **sensitive** data linked to your users. The best practice is to perform all API requests from your servers and provide the App with the information it needs to perform the single-sign-on.
+
+# Notes on the Info.plist file of the iOS App
 
 The Info.plist file provided with this project is incomplete, you must add:
 - COGNIFIT_CLIENT_ID and COGNIFIT_CLIENT_SECRET, these two values are linked to your account. They can be retrieved by logging in to your partner account at [https://cognifit.com](https://cognifit.com)
