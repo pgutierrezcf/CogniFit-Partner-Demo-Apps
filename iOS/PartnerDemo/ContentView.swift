@@ -140,8 +140,8 @@ struct ContentView: View {
                             ProgressView().progressViewStyle(.circular).scaleEffect(1.5)
                         }
                     }.frame(width: 0.75 * geometry.size.width,
-                            height: 0.3 * geometry.size.height).background(.white)
-                        .cornerRadius(20).shadow(radius: 20).padding()
+                            height: 0.3 * geometry.size.height).background(.background)
+                        .cornerRadius(20).shadow(color: .secondary, radius: 20).padding()
                 }
             }
         }
