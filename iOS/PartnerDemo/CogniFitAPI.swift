@@ -12,15 +12,15 @@ import Foundation
  */
 class CogniFitAPI: ObservableObject {
     @Published var accessToken: String = ""
-    
+
     func fetchAccessToken(clientId: String, clientSecret: String, userToken: String) {
         getSingleSignOnToken(clientId: clientId, clientSecret: clientSecret, userToken: userToken)
             .receive(on: DispatchQueue.main)
             .assign(to: &$accessToken)
     }
-    
+
     init() {}
-    
+
     private func getSingleSignOnToken(clientId: String, clientSecret: String, userToken: String) -> AnyPublisher<String, Never> {
         guard let url = URL(string: "/issue-access-token", relativeTo: baseUrl) else {
             return Just("").eraseToAnyPublisher()
