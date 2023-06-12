@@ -32,7 +32,8 @@
 		45866F7E2A14C72600DF7706 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		45866F802A14CD8E00DF7706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		45866F812A14E58B00DF7706 /* CogniFitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogniFitAPI.swift; sourceTree = "<group>"; };
-		45926A142A260C96005FF2B0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		45C0CAD92A37269F00D02EDF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		45C0CADA2A3726AF00D02EDF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +50,7 @@
 		45866F5B2A13BB6500DF7706 = {
 			isa = PBXGroup;
 			children = (
+				45C0CADA2A3726AF00D02EDF /* README.md */,
 				45866F662A13BB6500DF7706 /* PartnerDemo */,
 				45866F652A13BB6500DF7706 /* Products */,
 			);
@@ -72,7 +74,6 @@
 				45866F812A14E58B00DF7706 /* CogniFitAPI.swift */,
 				45866F6B2A13BB6600DF7706 /* Assets.xcassets */,
 				45866F6D2A13BB6600DF7706 /* Preview Content */,
-				45926A142A260C96005FF2B0 /* README.md */,
 			);
 			path = PartnerDemo;
 			sourceTree = "<group>";
@@ -80,6 +81,7 @@
 		45866F6D2A13BB6600DF7706 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				45C0CAD92A37269F00D02EDF /* README.md */,
 				45866F6E2A13BB6600DF7706 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
