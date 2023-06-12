@@ -18,3 +18,5 @@ Keep in mind: **accessing the API through the App/client is NOT recommended** be
 1. While the demo App allows you to specify an activity (assessment, training, ...) the CogniFit App will ignore this request, it'll simply perform the SSO. A future release of the CogniFit App will honor the App's request to perform a specific activity.
 2. Support for SSO was added to version 4.4.49 (iOS) and 4.4.50 (Android)
 
+# A note on user tokens
+Tokens can only be used once, they are *consumed* by the login process. This means you must create a new token for every 'single sign-on' attempt.
