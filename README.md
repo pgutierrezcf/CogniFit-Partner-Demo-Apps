@@ -3,7 +3,7 @@ Demoes how to do perform a single-sign-on (SSO) with the CogniFit App, on both i
 For these projects to work you must have a partner account.
 
 # Android Demo App - coming soon
-The Android version is coming soon. In the meantime you can test the SSO with Android Debug Bridge ( [adb](https://developer.android.com/studio/command-line/adb) ). You can issue this command to perform the SSO
+The Android version is coming soon. In the meantime you can test the SSO with Android Debug Bridge ( [adb](https://developer.android.com/studio/command-line/adb) ). You can issue this command to perform the SSO:
 ```
 adb shell am start -a android.intent.action.VIEW -c android.intent.category.DEFAULT \ 
 -d 'com.cognifit.app://sso?token=TTTTTT\&clientId=CCCCCCC\&callbackUrlScheme=com.cognifit.partnerdemo' com.cognifit.app
