@@ -15,18 +15,25 @@
             }
         </style>
     </head>
-    <body>
-        <app-root></app-root>
+    <script>
+        /* variables with the 'cf' prefix are created by thw WKWebView */
+        function loadCogniFit() {
+             HTML5JS.loadMode(cfCodeVersion, cfActivityType, cfActivityKey, 'cognifitContainer', {
+                clientId: cfClientId,
+                accessToken: cfAccessToken,
+             });
+        }
+        function loadCogniFitLoader() {
+            let scriptElement = document.createElement("script");
+            scriptElement.setAttribute("src", "https://js.cognifit.com/" + cfCodeVersion + "/html5Loader.js");
+            scriptElement.setAttribute("type", "text/javascript");
+            scriptElement.addEventListener("load", () => {
+                loadCogniFit();
+            });
+            document.body.appendChild(scriptElement);
+        }
+    </script>
+    <body onload="loadCogniFitLoader()">
         <div class="activityContainer" id="cognifitContainer"></div>
-        <script>
-            function loadCogniFit() {
-                /* variables with the 'cf' prefix are created by thw WKWebView */
-                 HTML5JS.loadMode(cfCodeVersion, cfActivityType, cfActivityKey, 'cognifitContainer', {
-                    clientId: cfClientId,
-                    accessToken: cfAccessToken,
-                 });
-            }
-        </script>
-        <script onload="loadCogniFit()" src="https://js.cognifit.com/2023-07-13_1429_kili/html5Loader.js"></script>
     </body>
 </html>
