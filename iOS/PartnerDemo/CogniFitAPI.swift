@@ -8,15 +8,22 @@
 import Combine
 import Foundation
 
-/** Can fetch a user's access token.
+/** The simplest implementation of a class that can access CogniFit's API. It supports only 2 methods:
+ *  1. fetch a user's access token;
+ *  2. fetch the code's version identifier
  */
 class CogniFitAPI: ObservableObject {
     @Published var accessToken: String = ""
+    @Published var codeVersion: String = ""
 
     func fetchAccessToken(clientId: String, clientSecret: String, userToken: String) {
         getSingleSignOnToken(clientId: clientId, clientSecret: clientSecret, userToken: userToken)
             .receive(on: DispatchQueue.main)
             .assign(to: &$accessToken)
+    }
+
+    func fetchCodeVersion() {
+        getCodeVersion().receive(on: DispatchQueue.main).assign(to: &$codeVersion)
     }
 
     init() {}
@@ -56,6 +63,36 @@ class CogniFitAPI: ObservableObject {
             .eraseToAnyPublisher()
     }
 
+    private func getCodeVersion() -> AnyPublisher<String, Never> {
+        let randomString = NSUUID().uuidString
+
+        guard let url = URL(string: "/description/versions/sdkjs?v=2.0&c=\(randomString)", relativeTo: baseUrl) else {
+            return Just("").eraseToAnyPublisher()
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map { data, _ in
+                do {
+                    let versionContainer: CodeVersionContainer = try JSONDecoder().decode(CodeVersionContainer.self, from: data)
+                    return versionContainer.version
+                } catch {
+                    if let response = String(data: data, encoding: .utf8) {
+                        print("Error: \(response)")
+                    } else {
+                        print("Error: unknown")
+                    }
+
+                    return ""
+                }
+            }
+            .replaceError(with: "")
+            .eraseToAnyPublisher()
+    }
+
     private let baseUrl = URL(string: "https://api.cognifit.com")
 }
 
@@ -68,5 +105,15 @@ struct AccessToken: Decodable {
     enum CodingKeys: String, CodingKey {
         case token = "access_token"
         case type = "token_type"
+    }
+}
+
+/** Used to decode the response of the "/description/versions/sdkjs?v=2.0" endpoint.
+ */
+struct CodeVersionContainer: Decodable {
+    var version: String
+
+    enum CodingKeys: String, CodingKey {
+        case version
     }
 }
