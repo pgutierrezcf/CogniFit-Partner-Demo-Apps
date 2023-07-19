@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CogniFit</title>
+        <base href="/"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <style>
+            .activityContainer {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <app-root></app-root>
+        <div class="activityContainer" id="cognifitContainer"></div>
+        <script>
+            function loadCogniFit() {
+                /* variables with the 'cf' prefix are created by thw WKWebView */
+                 HTML5JS.loadMode(cfCodeVersion, cfActivityType, cfActivityKey, 'cognifitContainer', {
+                    clientId: cfClientId,
+                    accessToken: cfAccessToken,
+                 });
+            }
+        </script>
+        <script onload="loadCogniFit()" src="https://js.cognifit.com/2023-07-13_1429_kili/html5Loader.js"></script>
+    </body>
+</html>

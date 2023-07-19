@@ -17,6 +17,9 @@
 		45866F7D2A13C5A900DF7706 /* TrainingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F7C2A13C5A900DF7706 /* TrainingTask.swift */; };
 		45866F7F2A14C72700DF7706 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F7E2A14C72600DF7706 /* Configuration.swift */; };
 		45866F822A14E58B00DF7706 /* CogniFitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45866F812A14E58B00DF7706 /* CogniFitAPI.swift */; };
+		45EE60B22A5FE4A9003BF1D1 /* ModalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EE60B12A5FE4A9003BF1D1 /* ModalWebView.swift */; };
+		45EE60B72A6028DB003BF1D1 /* ScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EE60B62A6028DB003BF1D1 /* ScriptMessageHandler.swift */; };
+		45EE60BC2A6039E4003BF1D1 /* WebApp in Resources */ = {isa = PBXBuildFile; fileRef = 45EE60BB2A6039E4003BF1D1 /* WebApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		45866F812A14E58B00DF7706 /* CogniFitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogniFitAPI.swift; sourceTree = "<group>"; };
 		45C0CAD92A37269F00D02EDF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		45C0CADA2A3726AF00D02EDF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		45EE60B12A5FE4A9003BF1D1 /* ModalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalWebView.swift; sourceTree = "<group>"; };
+		45EE60B62A6028DB003BF1D1 /* ScriptMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageHandler.swift; sourceTree = "<group>"; };
+		45EE60BB2A6039E4003BF1D1 /* WebApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebApp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +75,11 @@
 			children = (
 				45866F802A14CD8E00DF7706 /* Info.plist */,
 				45866F752A13BDAB00DF7706 /* Model */,
+				45EE60BF2A604546003BF1D1 /* Web View Auxiliary */,
+				45EE60BB2A6039E4003BF1D1 /* WebApp */,
 				45866F672A13BB6500DF7706 /* PartnerDemoApp.swift */,
 				45866F692A13BB6500DF7706 /* ContentView.swift */,
+				45EE60B12A5FE4A9003BF1D1 /* ModalWebView.swift */,
 				45866F812A14E58B00DF7706 /* CogniFitAPI.swift */,
 				45866F6B2A13BB6600DF7706 /* Assets.xcassets */,
 				45866F6D2A13BB6600DF7706 /* Preview Content */,
@@ -97,6 +106,14 @@
 				45866F7E2A14C72600DF7706 /* Configuration.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		45EE60BF2A604546003BF1D1 /* Web View Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				45EE60B62A6028DB003BF1D1 /* ScriptMessageHandler.swift */,
+			);
+			path = "Web View Auxiliary";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45866F6F2A13BB6600DF7706 /* Preview Assets.xcassets in Resources */,
+				45EE60BC2A6039E4003BF1D1 /* WebApp in Resources */,
 				45866F6C2A13BB6600DF7706 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,10 +210,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45EE60B22A5FE4A9003BF1D1 /* ModalWebView.swift in Sources */,
 				45866F792A13C4C600DF7706 /* ActivityType.swift in Sources */,
 				45866F822A14E58B00DF7706 /* CogniFitAPI.swift in Sources */,
 				45866F772A13BDC500DF7706 /* Assessment.swift in Sources */,
 				45866F7F2A14C72700DF7706 /* Configuration.swift in Sources */,
+				45EE60B72A6028DB003BF1D1 /* ScriptMessageHandler.swift in Sources */,
 				45866F7D2A13C5A900DF7706 /* TrainingTask.swift in Sources */,
 				45866F7B2A13C59900DF7706 /* TrainingSessiom.swift in Sources */,
 				45866F6A2A13BB6500DF7706 /* ContentView.swift in Sources */,
@@ -335,8 +355,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,8 +385,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

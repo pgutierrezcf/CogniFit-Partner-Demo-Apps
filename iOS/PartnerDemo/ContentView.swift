@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/** The App's main interface, it shows the configuration values that will be used to create an access token and launch a CogniFit activity.
+  * While there are endpoints to fetch the list of possible assessments, training sessions and games, we use a hard-coded set to make this App simpler.
+  * The user can be sent to the CogniFit App (through a single-sign-on operation) or the activity can be displayed within the App in a WKWebView.
+ */
 struct ContentView: View {
     @ObservedObject var configuration = Configuration()
 
@@ -95,30 +99,38 @@ struct ContentView: View {
                         Text("").onChange(of: api.accessToken) { accessToken in
                             let canLaunchCogniFitApp = accessToken.count > 0
                             let message: String
-                            if canLaunchCogniFitApp {
-                                message = "Launching CogniFit App"
-                                print("Using access token \(accessToken)")
-                                let launchUrl = createLaunchUrl(accessToken: accessToken)
-                                UIApplication.shared.open(launchUrl)
 
+                            if canLaunchCogniFitApp {
+                                print("Using access token \(accessToken)")
+                                if shouldLaunchEmbedded {
+                                    message = "Launching CogniFit Activity"
+                                    isWebViewVisible.toggle()
+                                } else {
+                                    message = "Launching CogniFit App"
+                                    let launchUrl = createLaunchUrl(accessToken: accessToken)
+                                    UIApplication.shared.open(launchUrl)
+                                }
                             } else {
                                 message = "Something went wrong, see console for details"
                             }
+
                             showMessageAndReset(message: message)
                         }
                         if isCogniFitAppAvailable {
                             Button("Sign In and Launch Activity") {
-                                modalMessage = "Fetching user credentials..."
-                                isBusy = true
-                                isShowingModalMessage = true
-
-                                api.fetchAccessToken(clientId: configuration.clientId, clientSecret: configuration.clientSecret, userToken: configuration.userToken)
+                                fetchAccessToken(launchEmbedded: false)
                             }
                         } else {
                             Button("Get CogniFit App") {
                                 let appStoreUrl = URL(string: "itms-apps://itunes.apple.com/app/id528285610")!
                                 UIApplication.shared.open(appStoreUrl)
                             }
+                        }
+                        Spacer(minLength: 20)
+                        Button("Launch Activity (embedded)") {
+                            fetchAccessToken(launchEmbedded: true)
+                        }.fullScreenCover(isPresented: $isWebViewVisible) {
+                            createEmbeddedWebView()
                         }
                     } else {
                         Text("ERROR: your Info.plist file does NOT include one or more of the following:\n• \(Configuration.kClientIdKey)\n• \(Configuration.kClientSecretKey)\n• \(Configuration.kUserTokenKey)\n• \(Configuration.kUrlSchemesKey)")
@@ -132,6 +144,19 @@ struct ContentView: View {
                     }
                 }
                 .padding().blur(radius: isShowingModalMessage ? 4 : 0)
+                .onAppear {
+                    // the code's version changes about twice a month as updates are pushed to the production environment
+                    // you might cache this value BUT not beyond a month as we cannot guarantee backwards compatibility
+                    modalMessage = "Fetching code version..."
+                    isBusy = true
+                    isShowingModalMessage = true
+
+                    api.fetchCodeVersion()
+                }.onChange(of: api.codeVersion) { codeVersion in
+                    isBusy = codeVersion.isEmpty
+                    isShowingModalMessage = isBusy
+                    print("Version is \(codeVersion)")
+                }
 
                 if isShowingModalMessage {
                     VStack(alignment: .center) {
@@ -145,6 +170,15 @@ struct ContentView: View {
                 }
             }
         }
+    }
+
+    private func fetchAccessToken(launchEmbedded: Bool) {
+        modalMessage = "Fetching user credentials..."
+        isBusy = true
+        isShowingModalMessage = true
+        shouldLaunchEmbedded = launchEmbedded
+
+        api.fetchAccessToken(clientId: configuration.clientId, clientSecret: configuration.clientSecret, userToken: configuration.userToken)
     }
 
     private func showMessageAndReset(message: String, duration: Double = 3) {
@@ -182,6 +216,24 @@ struct ContentView: View {
         return URL(string: urlString)!
     }
 
+    private func createEmbeddedWebView() -> some View {
+        let activityType: String
+        let activityKey: String
+        switch selectedActivityType {
+        case .assessment:
+            activityType = "assessmentMode"
+            activityKey = selectedAssessment.rawValue
+        case .trainingSession:
+            activityType = "trainingMode"
+            activityKey = selectedTrainingSession.rawValue
+        case .trainingTask:
+            activityType = "gameMode"
+            activityKey = selectedTrainingTask.rawValue
+        }
+
+        return ModalWebView(clientId: configuration.clientId, accessToken: api.accessToken, codeVersion: api.codeVersion, activityType: activityType, activityKey: activityKey)
+    }
+
     @Environment(\.scenePhase) private var scenePhase
     @State var isCogniFitAppAvailable: Bool = false
 
@@ -191,6 +243,8 @@ struct ContentView: View {
     @State private var selectedTrainingTask: TrainingTask = .puzzle3d
     @State private var isShowingModalMessage = false
     @State private var isBusy = true
+    @State private var shouldLaunchEmbedded = false
+    @State private var isWebViewVisible = false
     @State private var modalMessage = ""
     @State private var workItem: DispatchWorkItem?
 
