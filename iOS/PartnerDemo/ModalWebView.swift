@@ -24,20 +24,20 @@ struct ModalWebView: View {
         self.clientId = clientId
         self.accessToken = accessToken
         self.codeVersion = codeVersion
-        self.configurationJavaScript = """
+        configurationJavaScript = """
             var cfClientId = "\(clientId)";
             var cfAccessToken = "\(accessToken)";
             var cfCodeVersion = "\(codeVersion)";
             var cfActivityType = "\(activityType)";
             var cfActivityKey = "\(activityKey)";
         """
-        
+
         url = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "WebApp")!
     }
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            WebView(url: url, webViewContainer: self, configurationJavaScript: self.configurationJavaScript, auxiliaryJavaScript: self.auxiliaryJavaScript).ignoresSafeArea()
+            WebView(url: url, webViewContainer: self, configurationJavaScript: self.configurationJavaScript, auxiliaryJavaScript: self.auxiliaryJavaScript).ignoresSafeArea(.all)
             Button(role: .destructive, action: {
                 dismiss()
             }) {
@@ -80,7 +80,7 @@ struct ModalWebView: View {
     private let accessToken: String
     private let codeVersion: String
     private let configurationJavaScript: String
-    
+
     /** This Javascript code allows the code within the iframe to call methods in our webview that link to native code. */
     private let auxiliaryJavaScript = """
         if (window === parent) {
@@ -88,6 +88,8 @@ struct ModalWebView: View {
               var payload = event['data'];
               if (payload.status === 'aborted' || payload.status === 'completed') {
                 window.webkit.messageHandlers.cfPartnerApp.postMessage({ action: 'dismiss' }).then().catch();
+              } else if (payload.status === 'loaded') {
+                window.webkit.messageHandlers.cfPartnerApp.postMessage({ action: 'hasFinishedLoading' }).then().catch();
               } else {
                 window.webkit.messageHandlers.cfPartnerApp.postMessage(payload).then().catch();
               }
@@ -150,10 +152,10 @@ struct WebView: UIViewRepresentable {
 
         let configurationScript = WKUserScript(source: configurationJavaScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         configuration.userContentController.addUserScript(configurationScript)
-        
+
         let auxiliaryScript = WKUserScript(source: auxiliaryJavaScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         configuration.userContentController.addUserScript(auxiliaryScript)
-        
+
         if #available(iOS 10.0, *) {
             configuration.mediaTypesRequiringUserActionForPlayback = []
         } else {

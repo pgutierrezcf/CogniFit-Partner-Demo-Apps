@@ -40,6 +40,8 @@ class ScriptMessageHandler: NSObject {
             }
         case .some("dismiss"):
             webViewContainer?.dismiss()
+        case .some("hasFinishedLoading"):
+            print("Activity is up & running")
         case .some("printToConsole"):
             print("console.web: \(payload["message"] ?? "")")
         default:
